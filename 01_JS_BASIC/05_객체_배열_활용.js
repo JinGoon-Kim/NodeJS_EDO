@@ -58,11 +58,11 @@ const newObject = {
     sayNode,
     [es + 6] : 'Fantastic',
 };
-/*
+
 newObject.sayNode(); //Node
 newObject.sayJS(); // JS
 console.log(newObject.ES6); // Fantastic
-*/
+
 
 // 객체의 구조 분해
 const sayJ = newObject.sayJS; // 객체내의 함수를 별도의 변수에 저장
