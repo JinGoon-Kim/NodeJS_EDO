@@ -21,4 +21,9 @@
     - npm i -D nodemon
         - 파일이 변경되었을 때 자동 서버 갱신을 위해 추가 설치
     - pakage.json 파일에서 test 라인을 모두 삭제 후 nodemon 사용을 위해 "start": "nodemon app" 로 변경함.
-
+<br>
+2.3 기타 모듈 설치<br>
+    - npm i morgan cookie-parser express-session
+        - morgan : 요청과 응답에 대한 필요정보를 보기 위한 모듈
+        - cookie-parser : 쿠키 사용을 http 서버때보다 간결하게 사용하기 위한 모듈
+        - express-session : 세션 사용을 http 서버때보다 간결하게 사용하기 위한 모듈
