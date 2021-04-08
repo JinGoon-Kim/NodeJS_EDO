@@ -11,9 +11,9 @@
 
 1. [Visual Studio Code 설치](https://code.visualstudio.com/, "vscode install link") 에 접속하여 Visual Studio Code 다운로드 및 설치.
 
-2. express 설치
-2.1 cmd 창에서 프로젝트 폴더로 접근 (cd 이동경로)
-2.2 express 설치를 위한 명령어 입력
+2. express 설치<br>
+2.1 cmd 창에서 프로젝트 폴더로 접근 (cd 이동경로)<br>
+2.2 express 설치를 위한 명령어 입력<br>
 (🛑 이때 동기화되는 DropBox 나 클라우드 등 프로그램 사용할시 경로 오류가 날 수 있다.)
     - npm init
     - npm i express
