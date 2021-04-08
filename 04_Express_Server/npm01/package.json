@@ -1,14 +1,15 @@
 {
-  "name": "npm01",
+  "name": "npm02",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
-    "start" : "node app"
+    "start": "node app"
   },
   "author": "khj",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
