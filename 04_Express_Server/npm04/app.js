@@ -31,7 +31,8 @@ app.get('/', (req, res) => {
     });
     // name 이라는 이름의 쿠키가 있으면 OOO님 반갑습니다 표시 sand
     if (req.cookies.name){
-        res.send(`${req.cookies.name}님 안녕하세요`);
+        res.send(`${req.cookies.name}님 안녕하세요<br>
+        <button id = "login" onclick="location.href='/logout'">로그아웃</button>`);
     }else{ // 쿠키가 없으면 아래 index.html send
         res.sendFile(path.join(__dirname, '/index.html'));
     }
@@ -53,6 +54,14 @@ app.post('/login', (req, res) => {
         path:'/'
     });
     res.redirect('/'); // 특정 리퀘스트로 이동합니다.
+});
+
+app.get('/logout', (req, res) => {
+    res.clearCookie('name', req.cookies.name, {
+        httpOnly:true,
+        path:'/'
+    });
+    res.redirect('/');
 });
 
 app.listen(app.get('port'), () => {
