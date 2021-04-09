@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sequelize Server</title>
+    <style>
+        table {border: 1px solid black; border-collapse: collapse;}
+        table th, table td { border: 1px solid black;}
+    </style>
+</head>
+<body>
+    <div>
+        <form id="user-form">
+            <fieldset>
+                <legend>사용자 등록</legend>
+                <div><input id="username" type="text", placeholder="이름"></div>
+                <div><input id="age" type="number" placeholder="나이"></div>
+                <div><input id="married" type="checkbox">
+                    <label for="married">결혼 여부</label>
+                </div>
+                <button type="submit">등록</button>
+            </fieldset>
+        </form>
+    </div><br>
+    <table id="user-list">
+        <thead>
+            <tr><th>아이디</th><th>이름</th><th>나이</th><th>결혼여부</th></tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{'기혼' if user.maeeied else '미혼'}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
