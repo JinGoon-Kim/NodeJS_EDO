@@ -15,9 +15,21 @@ const commentsRouter = require('./routes/comments');
 
 // app 설정 및 nunjucks 설정
 const app = express();
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3003);
 app.set('view engine', 'html');
 nunjucks.configure('views', {express: app, watch: true, });
+
+// 숨김폴더 및 공용폴더 설정
+app.use(express.static(path.join(__dirname, 'public')));
+// 폼데이터 및 json 사용을 위한 설정
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/comments', commentsRouter);
+
+
 
 // 데이터베이스 연결
 // 모델 제작 후 데이터 베이스 연결시 해당 모델에 매핑되는 테이블이 없으면
