@@ -20,6 +20,8 @@ app.set('view engine', 'html');
 nunjucks.configure('views', {express: app, watch: true, });
 
 // 숨김폴더 및 공용폴더 설정
+// 클라이언트에서 /sequelize.js 를 요청하면
+// 서버에서는 localhost:3003/public/sequelize.js 로 응답합니다.
 app.use(express.static(path.join(__dirname, 'public')));
 // 폼데이터 및 json 사용을 위한 설정
 app.use(express.json());
