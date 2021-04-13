@@ -4,11 +4,25 @@ const Board = require('../models/board');
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+abc = (x, y, z) => x+y;
+
+router.get('/', async (req, res) => {
     try{
-        
+        const boards = await Board.findAll();
+        res.json(boards);
     }catch(err) {
         console.error(err);
+        next(err);
+    }
+});
+
+router.get('/writeForm', async (req, res) => {
+    try{
+        const luser = req.session.loginUser;
+        res.render('writeform', {luser});
+    }catch(err) {
+        console.error(err);
+        next(err);
     }
 });
 
@@ -27,15 +41,5 @@ router.post('/addboard', async (req, res, next) => {
         next(err);
     }
 });
-/*
-router.get('/', async (req, res, next) => {
-    try{
-        const board = await Board.findAll();
-        res.json(board);
-    }catch(err) {
-        console.error(err);
-        next(err);
-    }
-});
-*/
+
 module.exports = router;

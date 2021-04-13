@@ -56,19 +56,4 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
-router.get('/:id/boards', async (req, res, next) => {
-    try{
-        const comments = await Board.findAll({
-            include: {
-                model: Member,
-                where: { userid: req.params.userid},
-            },
-        });
-        console.log(boards);
-        res.json(boards);
-    }catch(err) {
-        console.error(err);
-    }
-});
-
 module.exports = router;

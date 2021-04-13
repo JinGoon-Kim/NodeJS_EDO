@@ -11,6 +11,7 @@ document.getElementById('login-form').addEventListener('submit', async(e) => {
     try{
         const res = await axios.post('/members/login', {userid, pwd});
         const mem = res.data;
+        var boardList;
         let m = document.getElementById("messageBox");
         if (mem.userid == userid && mem.pwd == pwd){
             location.href = '/main'; // 정상 로그인
