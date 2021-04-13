@@ -4,8 +4,15 @@ const Board = require('../models/board');
 
 const router = express.Router();
 
-router.post('join-form', async (req, res, next) => {
-    console.log('1');
+router.get('/', (req, res) => {
+    try{
+        res.render('member_insert', { });
+    }catch(err) {
+        console.error(err);
+    }
+});
+
+router.post('/addmember', async (req, res, next) => {
     try{
         const member = await Member.create({
             userid: req.body.userid,

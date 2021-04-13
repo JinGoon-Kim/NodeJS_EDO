@@ -3,34 +3,27 @@ module.exports = class Board extends Sequelize.Model {
 
     static init(sequelize) {
         return super.init({
-            num: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                primaryKey: true,
-                unique: true,
-                defaultValue: Sequelize.NOW,
-            },
-            writer: {
-                type: Sequelize.STRING(20),
-                allowNull: false,
-            },
             subject: {
-                type: Sequelize.STRING(20),
+                type: Sequelize.STRING(100),
                 allowNull: false,
             },
-            content: {
+            text: {
                 type: Sequelize.TEXT,
                 allowNull: false,
+            },
+            created_at: {
+                type: Sequelize.DATE,
+                allowNull: false,
+                defaultValue: Sequelize.NOW,
             },
         }, {
             sequelize,
             timestamps: false,
-            underscored: false,
             modelName: 'Board',
             tableName: 'boards',
             paranoid: false,
-            charset: 'utf8',
-            collate: 'utf8_general_ci',
+            charset: 'utf8mb4',
+            collate: 'utf8mb4_general_ci',
         });
     }
     static associate(db) {

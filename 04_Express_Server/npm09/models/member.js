@@ -22,21 +22,26 @@ module.exports = class Member extends Sequelize.Model {
                 allowNull: true,
             },
             email: {
-                type: Sequelize.STRING(20),
+                type: Sequelize.STRING(50),
                 allowNull: true,
+            },
+            created_at: {
+                type: Sequelize.DATE,
+                allowNull: false,
+                defaultValue: Sequelize.NOW,
             },
         }, {
             sequelize,
             timestamps: false,
-            underscored: false,
+            // underscored: false, timestamps 가 false 이므로 나오지 않기때문에 생략한다.
             modelName: 'Member',
             tableName: 'members',
             paranoid: false,
-            charset: 'utf8',
-            collate: 'utf8_general_ci',
+            charset: 'utf8mb4',
+            collate: 'utf8mb4_general_ci',
         });
     }
     static associate(db) {
-        db.Member.hasMany( db.Board, { foreignKey: 'writer', sourceKey: 'userid'});
+        db.Member.hasMany( db.Board, { foreignKey: 'writer', sourceKey: 'userid', onDelete: 'cascade'});
     }
 };
