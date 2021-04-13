@@ -32,4 +32,22 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:id/comments', async (req, res, next) => {
+    try{
+        const comments = await Comment.findAll({
+            // 검색 where 의 표현
+            include: {
+                // User 모델의 id 필드로 검색
+                // -> Comment 의 commenter 내 검색
+                model: User,
+                where: { id: req.params.id},
+            },
+        });
+        console.log(comments);
+        res.json(comments);
+    }catch(err) {
+        console.error(err);
+    }
+});
+
 module.exports = router;

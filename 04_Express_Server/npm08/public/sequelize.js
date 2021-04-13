@@ -22,6 +22,44 @@ async function getComment(id) {
             td.textContent = comment.comment;
             row.appendChild(td);
 
+            // 수정버튼
+            const edit = document.createElement('button');
+            edit.textContent = '수정';
+            // 수정버튼 이벤트 리스너 추가(click)
+            edit.addEventListener('click', async () => {
+                const newComment = prompt('바꿀 내용을 입력하세요');
+                if( !newComment ) {
+                   return alert('내용을 반드시 입력하셔야 합니다.'); 
+                }
+                try {
+                    await axios.patch(`/comments/${comment.id}`, { comment: newComment });
+                    getComment(id);
+                }catch(err) {
+                    console.error(err);
+                }
+            });
+
+            // 삭제 버튼
+            const remove = document.createElement('button');
+            remove.textContent = '삭제';
+            // 삭제버튼 이벤트 리스너 추가(click)
+            remove.addEventListener('click', async () => {
+                try{
+                    await axios.delete(`/comments/${comment.id}`);
+                    getComment(id);
+                }catch(err){
+                    console.error(err);
+                }
+            });
+
+            // 버튼을 행에 추가
+            td = document.createElement('td'); // td 생성
+            td.appendChild(edit);   // 버튼을 td에 추가
+            row.appendChild(td);    // 버튼이 든 td를 tr에 추가
+            td = document.createElement('td');
+            td.appendChild(remove);
+            row.appendChild(td);
+
             tbody.appendChild(row);
         });
     }catch(err) {
@@ -70,7 +108,8 @@ async function getUser() {
             tbody.appendChild(row); // 완성된 tr을 tbody에 추가
         });
     }catch(err) {
-
+        console.error(err);
+        next(err);
     }
 
 }
