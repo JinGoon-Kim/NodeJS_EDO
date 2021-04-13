@@ -6,6 +6,7 @@ const config = require(__dirname + '/../config/config.json')[env];
 // export 된 객체들 임포트
 const Member = require('./member');
 const Board = require('./board');
+
 //
 const db = {};
 

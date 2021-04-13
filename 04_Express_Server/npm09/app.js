@@ -4,7 +4,7 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 
 const {sequelize} = require('./models');
-
+const session = require('express-session');     // 익스프레스 세션 require
 // 라우터들 require
 const indexRouter = require('./routes');
 const membersRouter = require('./routes/members');
@@ -16,6 +16,18 @@ app.set('port', process.env.PORT || 3005);
 app.set('view engine', 'html');
 nunjucks.configure('views', {express: app, watch: true, });
 
+// 세션 설정
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'jingoon',
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    },
+    name: 'session-cookie',
+}));
+
 // 기타 앱 설정
 app.use(express.static(path.join(__dirname, 'public'))); // static 폴더 설정
 app.use(express.json());
@@ -25,6 +37,7 @@ app.use(express.urlencoded({ extended: false}));
 app.use('/', indexRouter);
 app.use('/members', membersRouter);
 app.use('/boards', boardsRouter);
+
 
 // 데이터 베이스 연결
 sequelize.sync({force: false})

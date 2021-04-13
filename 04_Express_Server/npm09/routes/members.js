@@ -29,10 +29,27 @@ router.post('/addmember', async (req, res, next) => {
     }
 });
 
-router.get('/', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     try{
-        const members = await Member.findAll();
+        const members = await Member.findOne({
+            where: {userid: req.body.userid},
+        });
+        // 결과가 있으면 세션에 저장, 검색 결과 전송
+        if (members) {
+            if (members.userid == req.body.userid && members.pwd == req.body.pwd) {
+                req.session.loginUser = members;
+                res.json(members);
+            }else { // 비번이 틀리면 검색 결과만 전송
+                console.log(members);
+                res.json(members);
+            }
+        }
+        // 아니면 빈 문자 전송
+        else res.json('');
+        
+        console.log(members);
         res.json(members);
+
     }catch(err) {
         console.error(err);
         next(err);

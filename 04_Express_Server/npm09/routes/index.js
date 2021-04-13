@@ -4,6 +4,16 @@ const Comment = require('../models/board');
 
 const router = express.Router();
 
+router.get('/main', (req, res) => {
+    const luser = req.session.loginUser;
+    try{
+        res.render('main', {luser});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
 router.get('/', (req, res) => {
     try{
         res.render('login', { });

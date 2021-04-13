@@ -15,15 +15,17 @@
         <form id="login-form">
             <fieldset>
                 <legend>로그인</legend>
-                <div><input id="id" type="text", placeholder="id"></div>
+                <div><input id="userid" type="text", placeholder="id"></div>
                 <div><input id="pwd" type="password" placeholder="password"></div>
                 <button type="submit">접속</button>
                 <input type="button" onclick="location.href='/members/'" value="회원가입"/>
-                <span id="msg">.</span>
             </fieldset>
         </form>
+        <div id="messageBox">
+
+        </div>
     </div><br>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="sequelize.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>

@@ -4,7 +4,15 @@ const Board = require('../models/board');
 
 const router = express.Router();
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
+    try{
+        
+    }catch(err) {
+        console.error(err);
+    }
+});
+
+router.post('/addboard', async (req, res, next) => {
     try{
         const board = await Board.create({
             num: req.body.num,
@@ -19,7 +27,7 @@ router.post('/', async (req, res, next) => {
         next(err);
     }
 });
-
+/*
 router.get('/', async (req, res, next) => {
     try{
         const board = await Board.findAll();
@@ -29,28 +37,5 @@ router.get('/', async (req, res, next) => {
         next(err);
     }
 });
-
-router.patch('/:userid', async (req, res, next) => {
-    try{
-        const result = await Board.update({
-            board: req.body.board,
-        },{
-            where: {userid: req.params.userid},
-        });
-        res.json(result);
-    }catch(err){
-        console.error(err);
-        next(err);
-    }
-});
-router.delete('/:userid', async (req, res, next) => {
-    try {
-        const result = await Board.destroy( { where: {userid: req.params.userid} } );
-        res.json(result);
-    }catch(err) {
-        console.error(err);
-        next(err);
-    }
-});
-
+*/
 module.exports = router;

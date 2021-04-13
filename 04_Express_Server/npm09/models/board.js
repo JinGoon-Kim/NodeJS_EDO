@@ -13,7 +13,6 @@ module.exports = class Board extends Sequelize.Model {
             },
             created_at: {
                 type: Sequelize.DATE,
-                allowNull: false,
                 defaultValue: Sequelize.NOW,
             },
         }, {

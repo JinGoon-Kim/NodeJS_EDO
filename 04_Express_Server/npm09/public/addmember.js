@@ -26,10 +26,4 @@ document.getElementById('join-form').addEventListener('submit', async(e) => {
     }catch (err){
         console.error(err);
     }
-
-    e.target.userid.value = '';
-    e.target.pwd.value = '';
-    e.target.name.value = '';
-    e.target.phone.value = '';
-    e.target.email.value = '';
 });
