@@ -47,5 +47,33 @@ router.get('/boardView/:id', async (req, res, next) => {
         next(err);
     }
 });
+router.get('/UpdateForm/:id', async (req, res, next) => {
+    try{
+        const board = await Board.findOne({
+            where: { id: req.params.id },
+        });
+        res.render('UpdateForm', {board});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.post('/update', async (req, res, next) => {
+    try{
+        const result = await Board.update({
+            subject: req.body.subject,
+            text: req.body.text,
+        },{
+            where: {id: req.body.id},
+        });
+        res.json({
+            isUpdate: true,
+        });
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;
