@@ -67,9 +67,7 @@ router.post('/update', async (req, res, next) => {
         },{
             where: {id: req.body.id},
         });
-        res.json({
-            isUpdate: true,
-        });
+        res.redirect('/boards/boardView/' + req.body.id);
     }catch(err){
         console.error(err);
         next(err);
