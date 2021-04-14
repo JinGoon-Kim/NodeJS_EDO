@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보 수정</title>
+</head>
+<body>
+    <div>
+        <form id="member-update-form">
+            <fieldset>
+                <legend>회원가입 - 사용자 등록</legend>
+                <div>{{luser.userid}}
+                    <input type="hidden" value="{{luser.userid}}" id="userid">
+                </div>
+                <div><input id="pwd" type="password" placeholder="password"></div>
+                <div><input id="name" type="text" placeholder="name" value="{{luser.name}}"></div>
+                <div><input id="phone" type="text" placeholder="phone" value="{{luser.phone}}"></div>
+                <div><input id="email" type="text" placeholder="email" value="{{luser.email}}"></div>
+                <button type="submit">수정완료</button>
+            </fieldset>
+        </form>
+    </div><br>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/updatemember.js"></script>
+</body>
+</html>

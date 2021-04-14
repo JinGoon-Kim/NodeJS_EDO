@@ -53,4 +53,36 @@ router.post('/login', async (req, res, next)=>{
     }
 });
 
+router.get('/memberUpdateForm', (req, res)=>{
+    try {
+        const luser = req.session.loginUser;
+        res.render('memberUpdateForm', {luser});
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+router.post('/updatemember', async (req, res, next) => {
+    try{
+        const result = await Member.update({
+            pwd: req.body.pwd,
+            name: req.body.name,
+            phone: req.body.phone,
+            email: req.body.email,
+        },{
+            where: {userid: req.body.userid},
+        });
+        const member = await Member.findOne({
+            where: { userid: req.body.userid },
+        });
+        req.session.loginUser = member;
+        res.json({
+            isUpdate: true
+        });
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
 module.exports = router;
