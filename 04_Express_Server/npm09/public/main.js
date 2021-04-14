@@ -1,6 +1,8 @@
 getBoard_list();   // 현재 파일 위치에서 getBoard_list 함수 실행
 
-function getBoard(id){}  // 게시글 내용을 보기 위한 함수
+function getBoard(id){  // 게시글 내용을 보기 위한 함수
+    location.href="/boards/boardView/" + id;
+}  
 
 async function getBoard_list(){
     try{
