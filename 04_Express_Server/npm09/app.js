@@ -9,12 +9,14 @@ const session = require('express-session');     // 익스프레스 세션 requir
 const indexRouter = require('./routes');
 const membersRouter = require('./routes/members');
 const boardsRouter = require('./routes/boards');
+const dateFilter = require('nunjucks-date-filter');
 
 // app 과 numjucks 등 설정
 const app = express();
 app.set('port', process.env.PORT || 3005);
 app.set('view engine', 'html');
-nunjucks.configure('views', {express: app, watch: true, });
+let env = nunjucks.configure('views', {express: app, watch: true, });
+env.addFilter('date', dateFilter);
 
 // 세션 설정
 app.use(session({
