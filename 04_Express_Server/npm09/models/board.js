@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 module.exports = class Board extends Sequelize.Model {
-
     static init(sequelize) {
         return super.init({
             subject: {
@@ -15,17 +14,17 @@ module.exports = class Board extends Sequelize.Model {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW,
             },
-        }, {
+        },{
             sequelize,
             timestamps: false,
             modelName: 'Board',
             tableName: 'boards',
             paranoid: false,
             charset: 'utf8mb4',
-            collate: 'utf8mb4_general_ci',
+            collate: 'utf8mb4_general_ci'
         });
     }
     static associate(db) {
-        db.Board.belongsTo( db.Member, { foreignKey: 'writer', targetKey: 'userid'});
+        db.Board.belongsTo(db.Member, { foreignKey: 'writer', targetKey: 'userid' });
     }
 };
