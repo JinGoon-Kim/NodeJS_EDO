@@ -72,6 +72,7 @@ router.post('/update', async (req, res, next) => {
         const result = await Board.update({
             subject: req.body.subject,
             text: req.body.text,
+            readCount: req.body.readCount -1,
         },{
             where: {id: req.body.id},
         });
