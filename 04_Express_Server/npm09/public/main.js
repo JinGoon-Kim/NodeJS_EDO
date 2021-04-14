@@ -31,8 +31,14 @@ async function getBoard_list(){
             td.id = "writer";
             td.textContent = board.writer; 
             row.appendChild(td);
+
+            td = document.createElement('td');  
+            td.id = "readCount";
+            td.textContent = board.readCount; 
             row.appendChild(td);
-            tbody.appendChild(row); 
+            
+            row.appendChild(td);
+            tbody.appendChild(row);
         });
     }catch(err){
         console.log(err);

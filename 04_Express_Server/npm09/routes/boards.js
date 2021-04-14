@@ -38,7 +38,15 @@ router.post('/writeBoard', async (req, res, next)=>{
 });
 router.get('/boardView/:id', async (req, res, next) => {
     try{
-        const board = await Board.findOne({
+        let board = await Board.findOne({
+            where: { id: req.params.id },
+        });
+        const readCount = await Board.update({
+            readCount: (board.getDataValue('readCount') + 1),
+        },{
+            where: {id: req.params.id},
+        });
+        board = await Board.findOne({
             where: { id: req.params.id },
         });
         res.render('boardView', {board});

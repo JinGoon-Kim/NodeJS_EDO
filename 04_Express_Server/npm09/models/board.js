@@ -10,6 +10,11 @@ module.exports = class Board extends Sequelize.Model {
                 type: Sequelize.TEXT,
                 allowNull: false,
             },
+            readCount: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+            },
             created_at: {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW,
