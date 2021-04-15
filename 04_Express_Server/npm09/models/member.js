@@ -26,14 +26,13 @@ module.exports = class Member extends Sequelize.Model {
             },
             created_at:{
                 type: Sequelize.DATE,
-                allowNull: false,
                 defaultValue: Sequelize.NOW,
             },
         }, {
             sequelize,
             timestamps: false, 
             modelName: 'Member',
-            tableName: 'Members',
+            tableName: 'members',
             paranoid: false,
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci'

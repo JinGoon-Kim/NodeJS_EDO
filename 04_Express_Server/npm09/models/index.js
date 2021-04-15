@@ -5,6 +5,7 @@ const config = require(__dirname + '/../config/config.json')[env];
 
 const Member = require('./member');
 const Board = require('./board');
+const Reply = require('./reply');
 
 const db = {};
 
@@ -16,10 +17,13 @@ db.Sequelize = Sequelize;  //  설치된 Sequelize 객체
 
 db.Member = Member;
 db.Board = Board;
+db.Reply = Reply;
 
 Member.init(sequelize);
 Board.init(sequelize);
+Reply.init(sequelize);
 Member.associate(db);
 Board.associate(db);
+Reply.associate(db);
 
 module.exports = db;

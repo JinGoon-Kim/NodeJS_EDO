@@ -12,7 +12,6 @@ module.exports = class Board extends Sequelize.Model {
             },
             readCount: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
                 defaultValue: 0,
             },
             created_at: {

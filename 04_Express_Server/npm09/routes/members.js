@@ -1,6 +1,7 @@
 const express = require('express');
 const Member = require('../models/member');
 const Board = require('../models/board');
+const Reply = require('../models/reply');
 const router = express.Router();
 
 router.get('/', (req, res)=>{
@@ -83,6 +84,14 @@ router.post('/updatemember', async (req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+
+router.get('/logout', async (req, res, next) => {
+    req.session.destroy(function(){
+        req.session;
+        res.clearCookie('session-cookie');
+        });
+    res.redirect('/');
 });
 
 module.exports = router;
