@@ -132,9 +132,23 @@ router.post('/replyinsert', async (req, res, next)=>{
             writer: writeUser.userid,
             board_num: req.body.id,
         });
+        res.json({
+            addReply: true
+        });
     } catch (err) {
         console.error(err);
         next(err); 
+    }
+});
+router.post('/deletereply', async (req, res, next)=>{
+    try {
+        const result = await Reply.destroy( { where: {id: req.body.id} } );
+        res.json({
+            isUpdate: true
+        });
+    }catch(err) {
+        console.error(err);
+        next(err);
     }
 });
 
