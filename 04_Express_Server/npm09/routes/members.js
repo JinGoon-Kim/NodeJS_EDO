@@ -22,7 +22,7 @@ router.post('/addmember', async (req, res, next)=>{
             phone: req.body.phone,
             email: req.body.email,
         });
-        console.log(member); 
+        // console.log(member); 
         res.json(member); 
     } catch (err) {
         console.error(err);

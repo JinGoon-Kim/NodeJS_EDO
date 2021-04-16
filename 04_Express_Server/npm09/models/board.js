@@ -10,6 +10,12 @@ module.exports = class Board extends Sequelize.Model {
                 type: Sequelize.TEXT,
                 allowNull: false,
             },
+            filename: {
+                type: Sequelize.STRING(1000),
+            },
+            realfilename: {
+                type: Sequelize.STRING(1000),
+            },
             readCount: {
                 type: Sequelize.INTEGER,
                 defaultValue: 0,

@@ -5,6 +5,9 @@ const nunjucks = require('nunjucks');
 const cookieParser = require('cookie-parser');
 const dateFilter = require('nunjucks-date-filter');
 
+const multer = require('multer');
+const fs = require('fs');
+
 const {sequelize} = require('./models');
 const session = require('express-session');     // 익스프레스 세션 require
 // 라우터들 require
@@ -36,6 +39,27 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public'))); // static 폴더 설정
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+
+// multer 파일 업로드 설정
+try {
+    fs.readdirSync('public/uploads');
+}catch(error){
+    console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+    fs.mkdirSync('public/uploads');
+}
+const upload = multer({
+    storage : multer.diskStorage({
+        destination(req, file, done){
+            done(null, 'public/uploads/');
+        },
+        filename(req, file, done) {
+            const ext = path.extname(file.originalname);
+            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+        },
+    }),
+    limits: { fileSize: 5 * 1024 * 1024},
+});
+
 
 // 라우터 설정
 app.use('/', indexRouter);

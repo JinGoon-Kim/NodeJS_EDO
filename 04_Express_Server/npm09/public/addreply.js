@@ -11,7 +11,7 @@ async function getReply(){
         // 댓글의 갯수만큼 작업할 함수를 실행합니다.
         reply.map( function(rep) {
             let row = document.createElement('tr'); // tr 생성
-            let td = document.createElement('td'); // td 생성 
+            let td = document.createElement('td'); // td 생성
             
             td = document.createElement('td');
             td.textContent = rep.id;
@@ -42,7 +42,7 @@ async function getReply(){
 
             edit.textContent = '삭제';
             edit.addEventListener('click', async (e) => {
-                console.log(e.target.value);
+                // console.log(e.target.value);
                 const id = e.target.value;
                 try {
                     const result = await axios.post('/boards/deletereply', { id });

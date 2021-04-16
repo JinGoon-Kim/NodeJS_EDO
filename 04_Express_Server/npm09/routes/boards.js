@@ -5,8 +5,11 @@ const Reply = require('../models/reply');
 const router = express.Router();
 router.get('/', async (req, res)=>{
     try {
-        const boards = await Board.findAll(); 
+        const boards = await Board.findAll({
+            order: [['created_at', 'DESC']],
+        });
         res.json(boards);
+        
     } catch (err) {
         console.error(err);
         next(err); 
@@ -25,12 +28,13 @@ router.get('/writeForm', (req, res)=>{
 
 router.post('/writeBoard', async (req, res, next)=>{
     try {
+        console.log(req.body.imgsrc);
         const board = await Board.create({
             subject: req.body.subject,
             writer: req.body.writer,
             text: req.body.text,
         });
-        console.log(board);
+        // console.log(board);
         res.json(board);
     } catch (err) {
         console.error(err);
@@ -147,6 +151,18 @@ router.post('/deletereply', async (req, res, next)=>{
             isUpdate: true
         });
     }catch(err) {
+        console.error(err);
+        next(err);
+    }
+});
+router.get('/countReply/:board_num', async (req, res, next) => {
+    try{
+        const replyCount = await Reply.findAndCountAll({
+            where: { board_num: req.params.board_num },
+        });
+        // console.log("실행 :", replyCount.count);
+        res.json(replyCount);
+    }catch(err){
         console.error(err);
         next(err);
     }
