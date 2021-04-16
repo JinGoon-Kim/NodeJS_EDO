@@ -31,7 +31,11 @@
         </tr>
         <tr height="300">
             <td width="150" align="center">내용</td>
-            <td width="150" colspan="3">&nbsp;{{board.text}}</td>
+            <td width="150" colspan="3">&nbsp;{{board.text}}<br>
+                {% if board.filename %}
+                <img src="/uploads/{{board.filename}}">
+                {% endif %}
+            </td>
         </tr>
     </table>
     <center>

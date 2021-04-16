@@ -2,29 +2,21 @@
 
 document.getElementById('write-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const imgsrc = e.target.imgsrc.value;
-    const subject = e.target.subject.value;
-    const writer = e.target.userid.value;
-    const text = e.target.text.value;
 
-    console.log("file[0] : ",e.target.imgsrc.file[0]);
-    console.log("value : ",e.target.imgsrc.value);
+    let formData = new FormData();
 
-    //filenameTransform(imgsrc);
-
-    if (!subject) { return alert('제목을 써주세요');
-    }else if (!text) { return alert('내용을 입력해주세요');
+    formData.append('image', e.target.image.files[0]);
+    formData.append('subject', e.target.subject.value);
+    formData.append('userid', e.target.userid.value);
+    formData.append('text', e.target.text.value);
+    
+    if (!e.target.subject.value) { return alert('제목을 써주세요');
+    }else if (!e.target.text.value) { return alert('내용을 입력해주세요');
     }
     try {
-        await axios.post('/boards/writeBoard', {subject, writer, text, imgsrc});
+        axios.post('/boards/writeBoard', formData);
         location.href = '/main';
     }catch(err) {
         console.error(err);
     }
 });
-
-async function filenameTransform(imgsrc) {
-    const formData = new FormData();
-    formData.append('image', e.target.image.file[0])
-    formData.append('title', e.target.title.value)
-}

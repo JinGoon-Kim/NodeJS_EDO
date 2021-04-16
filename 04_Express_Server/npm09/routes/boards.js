@@ -2,7 +2,10 @@ const express = require('express');
 const Member = require('../models/member');
 const Board = require('../models/board');
 const Reply = require('../models/reply');
+const upload = require('../config/multer');
+
 const router = express.Router();
+
 router.get('/', async (req, res)=>{
     try {
         const boards = await Board.findAll({
@@ -16,7 +19,7 @@ router.get('/', async (req, res)=>{
     }
 });
 
-router.get('/writeForm', (req, res)=>{
+router.get('/writeForm' ,(req, res)=>{
     try {
         const luser = req.session.loginUser;
         res.render('writeform', {luser});
@@ -26,16 +29,21 @@ router.get('/writeForm', (req, res)=>{
     }
 });
 
-router.post('/writeBoard', async (req, res, next)=>{
+router.post('/writeBoard', upload.single('image'), async (req, res, next)=>{
     try {
-        console.log(req.body.imgsrc);
-        const board = await Board.create({
+        let board = {
             subject: req.body.subject,
-            writer: req.body.writer,
+            writer: req.body.userid,
             text: req.body.text,
-        });
+        };
+        if ( req.file ){
+            board.filename = req.file.filename;
+            board.realfilename = req.file.originalname;
+        }
+        let result = await Board.create( board );
+
         // console.log(board);
-        res.json(board);
+        res.json(result);
     } catch (err) {
         console.error(err);
         next(err); 
@@ -167,5 +175,7 @@ router.get('/countReply/:board_num', async (req, res, next) => {
         next(err);
     }
 });
+
+
 
 module.exports = router;
