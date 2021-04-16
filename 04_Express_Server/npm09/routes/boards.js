@@ -99,6 +99,18 @@ router.get('/UpdateForm/:id', async (req, res, next) => {
 
 router.post('/update', async (req, res, next) => {
     try{
+        /*
+        let board = {
+            subject: req.body.subject,
+            text: req.body.text,
+        };
+        if ( req.file ){
+            board.filename = req.file.filename;
+            board.realfilename = req.file.originalname;
+        }
+        
+        let result = await Board.update( board );
+        */
         const result = await Board.update({
             subject: req.body.subject,
             text: req.body.text,

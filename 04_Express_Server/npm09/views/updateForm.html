@@ -26,6 +26,10 @@
                 </td>
             </tr>
             <tr>
+                <th>파일 첨부</td>
+                <td>&nbsp;<input type="file" id="image" name="image"></td>
+            </tr>
+            <tr>
                 <td width="150" align="center">작성일</td>
                 <td width="150" align="center">{{board.created_at | date("YYYY/MM/DD")}}</td>
                 <td align="center">조회수</td>
@@ -46,7 +50,7 @@
         </table>
         <center>
             <input type="submit" value="수정"/>
-            <input type="button" value="돌아가기" onclick="location.href='/boards/boardView2/ + id'"/>
+            <input type="button" value="돌아가기" onclick="location.href='/boards/boardView2/'+id"/>
         </center>
     </form>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
