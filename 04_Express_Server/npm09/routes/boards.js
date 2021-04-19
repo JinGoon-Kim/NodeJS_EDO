@@ -124,6 +124,7 @@ router.post('/update', async (req, res, next) => {
     }
 });
 router.get('/boardView2/:id', async (req, res, next) => {
+    const luser = req.session.loginUser;
     try{
         const board = await Board.findOne({
             where: { id: req.params.id },
