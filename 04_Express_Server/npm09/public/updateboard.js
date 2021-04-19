@@ -13,6 +13,7 @@ document.getElementById('update-form').addEventListener('submit', async (e) => {
     }
     try {
         axios.post('/boards/update', formData);
+        location.href = '/boards/boardView2/' + e.target.id.value;
     }catch(err) {
         console.error(err);
     }
