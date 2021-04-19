@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <form method="POST" action="/boards/update">
+    <form id="update-form">
         <table align="center">
             <tr>
                 <td width="150" align="center">번호</td>
@@ -26,8 +26,8 @@
                 </td>
             </tr>
             <tr>
-                <th>파일 첨부</td>
-                <td>&nbsp;<input type="file" id="image" name="image"></td>
+                <td>파일 첨부</td>
+                <td colspan="3">&nbsp;<input type="file" id="image" name="image"></td>
             </tr>
             <tr>
                 <td width="150" align="center">작성일</td>
@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <td width="150" align="center">제목</td>
-                <td width="150" colspan="3">&nbsp;
+                <td colspan="3">&nbsp;
                     <input type="text" name="subject" size="50" value="{{board.subject}}"/>
                 </td>
             </tr>
@@ -54,5 +54,6 @@
         </center>
     </form>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/updateboard.js"></script>
 </body>
 </html>

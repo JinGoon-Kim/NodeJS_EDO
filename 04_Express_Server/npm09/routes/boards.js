@@ -97,7 +97,7 @@ router.get('/UpdateForm/:id', async (req, res, next) => {
     }
 });
 
-router.post('/update', async (req, res, next) => {
+router.post('/update', upload.single('image'), async (req, res, next) => {
     try{
         /*
         let board = {
@@ -111,12 +111,29 @@ router.post('/update', async (req, res, next) => {
         
         let result = await Board.update( board );
         */
-        const result = await Board.update({
-            subject: req.body.subject,
-            text: req.body.text,
-        },{
-            where: {id: req.body.id},
-        });
+
+        let update;
+
+        if ( req.file ){
+            update = await Board.update( {
+                subject: req.body.subject,
+                text: req.body.text,
+                filename : req.file.filename,
+                realfilename: req.file.originalname,
+            },{
+                where: {id: req.body.id},
+            });
+        }else {
+            update = await Board.update( {
+                subject: req.body.subject,
+                text: req.body.text,
+            },{
+                where: {id: req.body.id},
+            });
+        }
+
+        console.log(update);
+
         res.redirect('/boards/boardView2/' + req.body.id);
     }catch(err){
         console.error(err);
