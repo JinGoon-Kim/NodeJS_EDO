@@ -113,7 +113,6 @@ router.post('/update', upload.single('image'), async (req, res, next) => {
         */
 
         let update;
-        const luser = req.session.loginUser;
         if ( req.file ){
             update = await Board.update( {
                 subject: req.body.subject,
@@ -131,19 +130,18 @@ router.post('/update', upload.single('image'), async (req, res, next) => {
                 where: {id: req.body.id},
             });
         }
-        // res.json(update);
-        // res.render('boardView', {update, luser});
+        res.json(update);
     }catch(err){
         console.error(err);
         next(err);
     }
 });
 router.get('/boardView2/:id', async (req, res, next) => {
-    const luser = req.session.loginUser;
     try{
         const board = await Board.findOne({
             where: { id: req.params.id },
         });
+        const luser = req.session.loginUser;
         res.render('boardView', {board, luser});
     }catch(err) {
         console.error(err);
